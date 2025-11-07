@@ -37,5 +37,22 @@ namespace JornadaMilhas.Test
             Assert.Contains("A oferta de viagem não possui rota ou período válidos.", oferta.Erros.Sumario);
             Assert.False(oferta.EhValido);
         }
+
+
+        [Fact]
+        public void TestandoOfertaComDataInicialMaiorQueDataFinal()
+        {
+            //Cenário - arrange
+            Rota rota = new Rota("OrigemTeste", "DestinoTeste");
+            Periodo periodo = new Periodo(DateTime.Now.AddDays(10), DateTime.Now.AddDays(-10));
+            double preco = 100;
+
+            //Ação - act
+            OfertaViagem oferta = new OfertaViagem(rota, periodo, preco);
+
+            //Validação - assert
+            Assert.Contains("Erro: Data de ida não pode ser maior que a data de volta.", oferta.Erros.Sumario);
+            Assert.False(oferta.EhValido);
+        }
     }
 }
