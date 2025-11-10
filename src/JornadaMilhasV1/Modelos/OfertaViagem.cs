@@ -29,6 +29,8 @@ public class OfertaViagem : Valida
         }
     }
 
+    public bool Ativa { get; set; } = true;
+
 
     public OfertaViagem(Rota rota, Periodo periodo, double preco)
     {
